@@ -47,10 +47,33 @@ function App() {
     }
   }, [message]);
 
+  type dndItemsObject = {
+    itemId: string;
+    title: string;
+    status: string;
+  };
+
+  function separateItems(arr: Array<dndItemsObject>) {
+    const arrTodo = [];
+    const arrInprogress = [];
+    const arrDone = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].status == "todo") {
+        arrTodo.push(arr[i]);
+      } else if (arr[i].status == "inprogress") {
+        arrInprogress.push(arr[i]);
+      } else if (arr[i].status == "done") {
+        arrDone.push(arr[i]);
+      }
+    }
+    return [arrTodo, arrInprogress, arrDone];
+  }
+
   if (message && JSON.parse(message).response) {
     console.log("Items: ", JSON.parse(message).response.Items);
   }
-  console.log("dndItems: " + JSON.stringify(dnditems));
+  console.log("dndItems: " + JSON.stringify(separateItems(dnditems)));
 
   return (
     <>
