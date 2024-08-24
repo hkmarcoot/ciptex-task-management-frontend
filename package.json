@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",
+    "@heroicons/react": "^2.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sockette": "^2.0.6"

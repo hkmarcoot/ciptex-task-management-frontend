@@ -24,9 +24,9 @@ export default function Board({
             ref={provided.innerRef}
           >
             {/* <Column key="0" id="0" todos={dnditems[0]} index="0" /> */}
-            <Column id="Todo" todos={dnditems[0]} index={0} />
-            <Column id="InProgress" todos={dnditems[1]} index={1} />
-            <Column id="Done" todos={dnditems[2]} index={2} />
+            <Column id="todo" todos={dnditems[0]} index={0} />
+            <Column id="inpogress" todos={dnditems[1]} index={1} />
+            <Column id="done" todos={dnditems[2]} index={2} />
           </div>
         )}
       </Droppable>
