@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^16.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sockette": "^2.0.6"
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@types/react": "^18.3.3",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",

@@ -3,12 +3,16 @@
 // import viteLogo from '/vite.svg'
 // import './App.css'
 import React, { useEffect, useState } from "react";
-import Testing from "./Testing";
 import Sockette from "sockette";
+import Board from "./Board";
 
 function App() {
   const [message, setMessage] = useState("");
-  const [dnditems, setDndItems] = useState([]);
+  const [dnditems, setDndItems] = useState<Array<Array<dndItemsObject>>>([
+    [],
+    [],
+    [],
+  ]);
   const [startnget, setStartnget] = useState(false);
 
   const ws = new Sockette(
@@ -35,7 +39,8 @@ function App() {
   useEffect(() => {
     if (startnget) {
       if (message && JSON.parse(message).response) {
-        setDndItems(JSON.parse(message).response.Items);
+        const input = separateItems(JSON.parse(message).response.Items);
+        setDndItems(input);
         setStartnget(false);
       }
     }
@@ -43,7 +48,8 @@ function App() {
 
   useEffect(() => {
     if (message && JSON.parse(message).Items) {
-      setDndItems(JSON.parse(message).Items);
+      const input = separateItems(JSON.parse(message).Items);
+      setDndItems(input);
     }
   }, [message]);
 
@@ -73,7 +79,7 @@ function App() {
   if (message && JSON.parse(message).response) {
     console.log("Items: ", JSON.parse(message).response.Items);
   }
-  console.log("dndItems: " + JSON.stringify(separateItems(dnditems)));
+  console.log("dndItems: " + JSON.stringify(dnditems));
 
   return (
     <>
@@ -123,7 +129,7 @@ function App() {
         >
           Click & Update
         </button>
-        <Testing />
+        <br />
         <button
           onClick={() => {
             ws.send(JSON.stringify({ action: "scanEntireTable" }));
@@ -134,9 +140,7 @@ function App() {
         >
           Start The Task Management App
         </button>
-        <p>{message}</p>
-        <br />
-        <div></div>
+        {dnditems && message && <Board dnditems={dnditems} />}
       </div>
     </>
   );
