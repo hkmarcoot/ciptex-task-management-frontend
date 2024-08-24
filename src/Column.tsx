@@ -26,11 +26,13 @@ export default function Column({ id, todos, index }: Props) {
           ref={provided.innerRef}
         >
           <Droppable droppableId={index.toString()} type="card">
-            {(provided) => (
+            {(provided, snapshot) => (
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className="p-2 rounded-2xl shadow-sm bg-gray-200"
+                className={`p-2 rounded-2xl shadow-sm ${
+                  snapshot.isDraggingOver ? "bg-pink-100" : "bg-gray-200"
+                }`}
               >
                 <h1 className="flex flex-row justify-center">
                   {id} <span className="pl-2">{todos.length}</span>
