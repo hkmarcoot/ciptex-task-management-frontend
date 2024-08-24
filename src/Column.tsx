@@ -36,7 +36,7 @@ export default function Column({ id, todos, index }: Props) {
                   {id} <span className="pl-2">{todos.length}</span>
                 </h1>
 
-                <div className="py-2">
+                <div className="space-y-2">
                   {todos.map((todo, index) => (
                     <Draggable
                       key={todo.itemId}

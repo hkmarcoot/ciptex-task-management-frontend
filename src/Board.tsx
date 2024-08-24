@@ -25,7 +25,7 @@ export default function Board({
           >
             {/* <Column key="0" id="0" todos={dnditems[0]} index="0" /> */}
             <Column id="todo" todos={dnditems[0]} index={0} />
-            <Column id="inpogress" todos={dnditems[1]} index={1} />
+            <Column id="inprogress" todos={dnditems[1]} index={1} />
             <Column id="done" todos={dnditems[2]} index={2} />
           </div>
         )}
