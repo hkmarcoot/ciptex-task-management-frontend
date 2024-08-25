@@ -11,6 +11,8 @@ function App() {
   ]);
   const [startnget, setStartnget] = useState(false);
   const [ws, setWs] = useState<Sockette>(new Sockette(""));
+  const [connectStatus, setConnectStatus] = useState("Connecting...");
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const newWs = new Sockette(
@@ -20,6 +22,8 @@ function App() {
         maxAttempts: 10,
         onopen: (e) => {
           console.log("Connected!", e);
+          setConnectStatus("Connected! Please Click The Button To Start.");
+          setIsConnected(true);
         },
         onmessage: (e) => {
           console.log("Received:", e);
@@ -27,9 +31,17 @@ function App() {
             setMessage(e.data);
           }
         },
-        onreconnect: (e) => console.log("Reconnecting...", e),
+        onreconnect: (e) => {
+          console.log("Reconnecting...", e);
+          setConnectStatus("Reconnecting...");
+          setIsConnected(false);
+        },
         onmaximum: (e) => console.log("Stop Attempting!", e),
-        onclose: (e) => console.log("Closed!", e),
+        onclose: (e) => {
+          console.log("Closed!", e);
+          setConnectStatus("Closed!");
+          setIsConnected(false);
+        },
         onerror: (e) => console.log("Error:", e),
       }
     );
@@ -135,62 +147,24 @@ function App() {
   return (
     <>
       <div>
-        <p className="text-red-500">Welcome To The Task Management App</p>
-        <button
-          onClick={() => ws.send(JSON.stringify({ action: "test" }))}
-          type="button"
-          className="border border-red-500"
-        >
-          Click & Test
-        </button>
-        <button
-          onClick={() => ws.send(JSON.stringify({ action: "scanEntireTable" }))}
-          type="button"
-          className="border border-red-500 ml-4"
-        >
-          Click & Get
-        </button>
-        <button
-          onClick={() =>
-            ws.send(
-              JSON.stringify({
-                action: "createItem",
-                title: "New task from frontend",
-                status: "todo",
-              })
-            )
-          }
-          type="button"
-          className="border border-red-500 ml-4"
-        >
-          Click & Create
-        </button>
-        <button
-          onClick={() =>
-            ws.send(
-              JSON.stringify({
-                action: "updateStatus",
-                itemId: "thisispartitionkey",
-                status: "todo",
-              })
-            )
-          }
-          type="button"
-          className="border border-red-500 ml-4"
-        >
-          Click & Update
-        </button>
-        <br />
-        <button
-          onClick={() => {
-            ws.send(JSON.stringify({ action: "scanEntireTable" }));
-            setStartnget(true);
-          }}
-          type="button"
-          className="border border-red-500 ml-4"
-        >
-          Start The Application
-        </button>
+        <div className="flex flex-col justify-center items-center my-6">
+          <p className="text-xl">Welcome To The Task Management App</p>
+          <p>{connectStatus}</p>
+          {isConnected ? (
+            <button
+              onClick={() => {
+                ws.send(JSON.stringify({ action: "scanEntireTable" }));
+                setStartnget(true);
+              }}
+              type="button"
+              className="border border-red-500 px-2 mt-2 hover:border-green-500"
+            >
+              Start The Application
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
         {dnditems && message && <Board dnditems={dnditems} ws={ws} />}
       </div>
     </>

@@ -42,9 +42,10 @@ export default function Column({ id, todos, index, ws }: Props) {
       );
       setAlert("");
       setSelectedValue("");
+      setInputTitle("");
       setIsOpenModal(false);
     } else {
-      setAlert("Title And Status Cannot Be Empty!");
+      setAlert("Alert: Title And Status Cannot Be Empty!");
     }
   }
 
@@ -111,10 +112,10 @@ export default function Column({ id, todos, index, ws }: Props) {
       </Draggable>
       {isOpenModal ? (
         <div className="window-modal">
-          <div className="data-card-edit">
-            <h2>Add New Todo</h2>
+          <div className="data-card-edit flex flex-col justify-center items-center">
+            <h2 className="text-2xl">Add New Todo</h2>
             <input
-              className="w-3/5 min-w-[200px] h-10 border-2"
+              className="w-3/5 min-w-[200px] h-10 border-2 mt-6"
               id="input"
               type="text"
               placeholder="Todo Title"
@@ -124,6 +125,7 @@ export default function Column({ id, todos, index, ws }: Props) {
             <select
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
+              className="w-3/5 py-2 mt-4"
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -131,19 +133,24 @@ export default function Column({ id, todos, index, ws }: Props) {
                 </option>
               ))}
             </select>
-            <button
-              className="text-pink-600 hover:text-pink-700"
-              onClick={() => setIsOpenModal(false)}
-            >
-              <XCircleIcon className="h-6 w-6" />
-            </button>
-            <button
-              className="text-green-600 hover:text-green-700"
-              onClick={() => createCard()}
-            >
-              <PlusCircleIcon className="h-6 w-6" />
-            </button>
-            <p>{alert}</p>
+            <div className="flex flex-row justify-evenly w-3/5 mt-4">
+              <button
+                className="text-pink-600 hover:text-pink-700"
+                onClick={() => {
+                  setIsOpenModal(false);
+                  setAlert("");
+                }}
+              >
+                <XCircleIcon className="h-12 w-12" />
+              </button>
+              <button
+                className="text-green-600 hover:text-green-700"
+                onClick={() => createCard()}
+              >
+                <PlusCircleIcon className="h-12 w-12" />
+              </button>
+            </div>
+            <p className="text-red-500 mt-4">{alert}</p>
           </div>
         </div>
       ) : null}
