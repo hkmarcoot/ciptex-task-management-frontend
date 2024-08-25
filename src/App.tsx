@@ -165,7 +165,9 @@ function App() {
             <></>
           )}
         </div>
-        {dnditems && message && <Board dnditems={dnditems} ws={ws} />}
+        {dnditems && message && (
+          <Board dnditems={dnditems} ws={ws} setDndItems={setDndItems} />
+        )}
       </div>
     </>
   );
