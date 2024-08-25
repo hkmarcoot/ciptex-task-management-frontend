@@ -21,7 +21,14 @@ export default function Board({
     let newStatus = "";
     let getItemId = "";
 
+    // Case if user drag the item to nowhere
     if (!destination) return;
+    // Case if user drag the item back to the same position
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    )
+      return;
 
     console.log(destination);
     console.log(source);
