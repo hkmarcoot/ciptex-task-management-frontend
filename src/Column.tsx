@@ -3,6 +3,7 @@ import React from "react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import TodoCard from "./TodoCard";
+import Sockette from "sockette";
 
 type dndItemsObject = {
   itemId: string;
@@ -14,9 +15,10 @@ type Props = {
   id: string;
   todos: dndItemsObject[];
   index: number;
+  ws: Sockette;
 };
 
-export default function Column({ id, todos, index }: Props) {
+export default function Column({ id, todos, index, ws }: Props) {
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -53,6 +55,7 @@ export default function Column({ id, todos, index }: Props) {
                           innerRef={provided.innerRef}
                           draggableProps={provided.draggableProps}
                           dragHandleProps={provided.dragHandleProps}
+                          ws={ws}
                         />
                       )}
                     </Draggable>
