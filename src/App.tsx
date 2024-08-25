@@ -135,7 +135,7 @@ function App() {
   return (
     <>
       <div>
-        <p className="text-red-500">Hello world</p>
+        <p className="text-red-500">Welcome To The Task Management App</p>
         <button
           onClick={() => ws.send(JSON.stringify({ action: "test" }))}
           type="button"
@@ -189,7 +189,7 @@ function App() {
           type="button"
           className="border border-red-500 ml-4"
         >
-          Start The Task Management App
+          Start The Application
         </button>
         {dnditems && message && <Board dnditems={dnditems} ws={ws} />}
       </div>

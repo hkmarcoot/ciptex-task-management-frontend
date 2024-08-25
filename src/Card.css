@@ -1,0 +1,29 @@
+.window-modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 1); /* Fallback color*/
+  /* background-color: var(--black-opa); Black w/ opacity */
+}
+
+.data-card-edit {
+  /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+
+  background-color: rgba(239, 172, 49, 0.868);
+  margin: 10px auto;
+
+  border: 1px solid #ddd;
+  padding: 16px;
+  /* margin: 16px; */
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+}
