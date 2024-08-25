@@ -25,8 +25,8 @@ export default function Board({
     if (!destination) return;
     // Case if user drag the item back to the same position
     if (
-      source.index === destination.index &&
-      source.droppableId === destination.droppableId
+      source.index == destination.index &&
+      source.droppableId == destination.droppableId
     )
       return;
 
@@ -44,13 +44,16 @@ export default function Board({
 
     getItemId = dnditems[Number(source.droppableId)][source.index].itemId;
 
-    ws.send(
-      JSON.stringify({
-        action: "updateStatus",
-        itemId: getItemId,
-        status: newStatus,
-      })
-    );
+    // Send out updated data only if the drag and drop item is card but not column
+    if (type == "card") {
+      ws.send(
+        JSON.stringify({
+          action: "updateStatus",
+          itemId: getItemId,
+          status: newStatus,
+        })
+      );
+    }
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
