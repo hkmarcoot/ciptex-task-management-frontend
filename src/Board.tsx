@@ -13,7 +13,15 @@ export default function Board({
 }: {
   dnditems: Array<Array<dndItemsObject>>;
 }) {
-  const handleOnDragEnd = (result: DropResult) => {};
+  const handleOnDragEnd = (result: DropResult) => {
+    const { destination, source, type } = result;
+
+    if (!destination) return;
+
+    console.log(destination);
+    console.log(source);
+    console.log(type);
+  };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="board" direction="horizontal" type="column">
@@ -27,6 +35,9 @@ export default function Board({
             <Column id="todo" todos={dnditems[0]} index={0} />
             <Column id="inprogress" todos={dnditems[1]} index={1} />
             <Column id="done" todos={dnditems[2]} index={2} />
+
+            {/* Provide space when drag and drop */}
+            {provided.placeholder}
           </div>
         )}
       </Droppable>

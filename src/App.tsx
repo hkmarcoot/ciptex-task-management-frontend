@@ -73,7 +73,36 @@ function App() {
         arrDone.push(arr[i]);
       }
     }
-    return [arrTodo, arrInprogress, arrDone];
+
+    // Sort the items alphabetically
+    const sortedArrTodo = arrTodo.sort(function (a, b) {
+      if (a.title < b.title) {
+        return -1;
+      } else if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+
+    const sortedArrInprogress = arrInprogress.sort(function (a, b) {
+      if (a.title < b.title) {
+        return -1;
+      } else if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+
+    const sortedArrDone = arrDone.sort(function (a, b) {
+      if (a.title < b.title) {
+        return -1;
+      } else if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+
+    return [sortedArrTodo, sortedArrInprogress, sortedArrDone];
   }
 
   if (message && JSON.parse(message).response) {
