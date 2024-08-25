@@ -29,6 +29,8 @@ export default function Board({
       source.droppableId == destination.droppableId
     )
       return;
+    // Case if user drag the column
+    if (type == "column") return;
 
     console.log(destination);
     console.log(source);
