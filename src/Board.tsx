@@ -1,6 +1,7 @@
 // import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 import Column from "./Column";
+import Sockette from "sockette";
 
 type dndItemsObject = {
   itemId: string;
@@ -10,17 +11,39 @@ type dndItemsObject = {
 
 export default function Board({
   dnditems,
+  ws,
 }: {
   dnditems: Array<Array<dndItemsObject>>;
+  ws: Sockette;
 }) {
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, type } = result;
+    let newStatus = "";
+    let getItemId = "";
 
     if (!destination) return;
 
     console.log(destination);
     console.log(source);
     console.log(type);
+
+    if (destination.droppableId == "0") {
+      newStatus = "todo";
+    } else if (destination.droppableId == "1") {
+      newStatus = "inprogress";
+    } else if (destination.droppableId == "2") {
+      newStatus = "done";
+    }
+
+    getItemId = dnditems[Number(source.droppableId)][source.index].itemId;
+
+    ws.send(
+      JSON.stringify({
+        action: "updateStatus",
+        itemId: getItemId,
+        status: newStatus,
+      })
+    );
   };
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>

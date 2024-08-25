@@ -1,7 +1,3 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
 import React, { useEffect, useState } from "react";
 import Sockette from "sockette";
 import Board from "./Board";
@@ -14,27 +10,52 @@ function App() {
     [],
   ]);
   const [startnget, setStartnget] = useState(false);
+  const [ws, setWs] = useState<Sockette>(new Sockette(""));
 
-  const ws = new Sockette(
-    "wss://144lhasnn9.execute-api.eu-north-1.amazonaws.com/production/",
-    {
-      timeout: 5e3,
-      maxAttempts: 10,
-      onopen: (e) => {
-        console.log("Connected!", e);
-      },
-      onmessage: (e) => {
-        console.log("Received:", e);
-        if (e.data !== "") {
-          setMessage(e.data);
-        }
-      },
-      onreconnect: (e) => console.log("Reconnecting...", e),
-      onmaximum: (e) => console.log("Stop Attempting!", e),
-      onclose: (e) => console.log("Closed!", e),
-      onerror: (e) => console.log("Error:", e),
-    }
-  );
+  useEffect(() => {
+    const newWs = new Sockette(
+      "wss://144lhasnn9.execute-api.eu-north-1.amazonaws.com/production/",
+      {
+        timeout: 5e3,
+        maxAttempts: 10,
+        onopen: (e) => {
+          console.log("Connected!", e);
+        },
+        onmessage: (e) => {
+          console.log("Received:", e);
+          if (e.data !== "") {
+            setMessage(e.data);
+          }
+        },
+        onreconnect: (e) => console.log("Reconnecting...", e),
+        onmaximum: (e) => console.log("Stop Attempting!", e),
+        onclose: (e) => console.log("Closed!", e),
+        onerror: (e) => console.log("Error:", e),
+      }
+    );
+    setWs(newWs);
+  }, []);
+
+  // const ws = new Sockette(
+  //   "wss://144lhasnn9.execute-api.eu-north-1.amazonaws.com/production/",
+  //   {
+  //     timeout: 5e3,
+  //     maxAttempts: 10,
+  //     onopen: (e) => {
+  //       console.log("Connected!", e);
+  //     },
+  //     onmessage: (e) => {
+  //       console.log("Received:", e);
+  //       if (e.data !== "") {
+  //         setMessage(e.data);
+  //       }
+  //     },
+  //     onreconnect: (e) => console.log("Reconnecting...", e),
+  //     onmaximum: (e) => console.log("Stop Attempting!", e),
+  //     onclose: (e) => console.log("Closed!", e),
+  //     onerror: (e) => console.log("Error:", e),
+  //   }
+  // );
 
   useEffect(() => {
     if (startnget) {
@@ -101,6 +122,7 @@ function App() {
       }
       return 0;
     });
+    // Sorting end
 
     return [sortedArrTodo, sortedArrInprogress, sortedArrDone];
   }
@@ -169,7 +191,7 @@ function App() {
         >
           Start The Task Management App
         </button>
-        {dnditems && message && <Board dnditems={dnditems} />}
+        {dnditems && message && <Board dnditems={dnditems} ws={ws} />}
       </div>
     </>
   );
