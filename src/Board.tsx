@@ -109,9 +109,9 @@ export default function Board({
             ref={provided.innerRef}
           >
             {/* <Column key="0" id="0" todos={dnditems[0]} index="0" /> */}
-            <Column id="todo" todos={dnditems[0]} index={0} ws={ws} />
-            <Column id="inprogress" todos={dnditems[1]} index={1} ws={ws} />
-            <Column id="done" todos={dnditems[2]} index={2} ws={ws} />
+            <Column id="To Do" todos={dnditems[0]} index={0} ws={ws} />
+            <Column id="In Progress" todos={dnditems[1]} index={1} ws={ws} />
+            <Column id="Done" todos={dnditems[2]} index={2} ws={ws} />
 
             {/* Provide space when drag and drop */}
             {provided.placeholder}

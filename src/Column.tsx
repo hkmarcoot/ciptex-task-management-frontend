@@ -63,15 +63,16 @@ export default function Column({ id, todos, index, ws }: Props) {
                 <div
                   {...provided.droppableProps}
                   ref={provided.innerRef}
-                  className={`p-2 rounded-2xl shadow-sm ${
-                    snapshot.isDraggingOver ? "bg-pink-100" : "bg-gray-200"
+                  className={`p-2 rounded-2xl shadow-sm border-b-4 border-teal-700 ${
+                    snapshot.isDraggingOver ? "bg-pink-100" : "bg-teal-100"
                   }`}
                 >
-                  <h1 className="flex flex-row justify-center">
-                    {id} <span className="pl-2">{todos.length}</span>
+                  <h1 className="flex flex-row justify-center text-lg">
+                    <span className="">{id}</span>{" "}
+                    <span className="pl-2">{todos.length}</span>
                   </h1>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 mt-2">
                     {todos.map((todo, index) => (
                       <Draggable
                         key={todo.itemId}
@@ -115,7 +116,7 @@ export default function Column({ id, todos, index, ws }: Props) {
           <div className="data-card-edit flex flex-col justify-center items-center">
             <h2 className="text-2xl">Add New Todo</h2>
             <input
-              className="w-3/5 min-w-[200px] h-10 border-2 mt-6"
+              className="w-4/5 min-w-[200px] h-10 border-2 mt-6"
               id="input"
               type="text"
               placeholder="Todo Title"
@@ -125,7 +126,7 @@ export default function Column({ id, todos, index, ws }: Props) {
             <select
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
-              className="w-3/5 py-2 mt-4"
+              className="w-4/5 py-2 mt-4"
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -133,7 +134,7 @@ export default function Column({ id, todos, index, ws }: Props) {
                 </option>
               ))}
             </select>
-            <div className="flex flex-row justify-evenly w-3/5 mt-4">
+            <div className="flex flex-row justify-between w-3/5 mt-4">
               <button
                 className="text-pink-600 hover:text-pink-700"
                 onClick={() => {

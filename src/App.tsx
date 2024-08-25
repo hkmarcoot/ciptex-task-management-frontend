@@ -146,9 +146,11 @@ function App() {
 
   return (
     <>
-      <div>
-        <div className="flex flex-col justify-center items-center my-6">
-          <p className="text-xl">Welcome To The Task Management App</p>
+      <div className="h-screen bg-gradient-to-tr from-green-100 to-white">
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-xl mt-6 underline decoration-teal-700">
+            Welcome To The Task Management App
+          </p>
           <p>{connectStatus}</p>
           {isConnected ? (
             <button
@@ -157,7 +159,7 @@ function App() {
                 setStartnget(true);
               }}
               type="button"
-              className="border border-red-500 px-2 mt-2 hover:border-green-500"
+              className="border border-red-500 px-2 mt-2 mb-4 hover:border-green-500 bg-white"
             >
               Start The Application
             </button>
