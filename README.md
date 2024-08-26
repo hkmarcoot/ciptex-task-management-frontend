@@ -40,7 +40,7 @@ I create and initialize the project by follow this guide: [How to setup React, T
 
 Sockette is a package that simplify using the websocket from the frontend.
 
-The sockette can be found here: [GitHub- sockette](https://github.com/lukeed/sockette)
+The sockette can be found here: [GitHub - sockette](https://github.com/lukeed/sockette)
 
 After a few trials, the frontend can fetch data from AWS WebSocket API. I got this reply after sending { action: "scanEntireTable" } to the api:
 
@@ -48,7 +48,7 @@ After a few trials, the frontend can fetch data from AWS WebSocket API. I got th
 {"message":"Items scanned","response":{"$metadata":{"httpStatusCode":200,"requestId":"1UVNFTAQCUB3BUM72C5J6C4UINVV4KQNSO5AEMVJF66Q9ASUAAJG","attempts":1,"totalRetryDelay":0},"Count":4,"Items":[{"itemId":"thisispartitionkey","status":"todo","title":"This is the first task created in platform"},{"itemId":"6c2118bd-515b-4d05-a351-2dbac6e2d454","status":"todo","title":"New task from frontend"},{"itemId":"7085b41f-154d-4745-9556-06ce75dd8df4","status":"inprogress","title":"This is the first task from terminal"},{"itemId":"9ddb80ff-6618-4874-a351-eed8466320ea","status":"todo","title":"New task from frontend"}],"ScannedCount":4}}
 ```
 
-I also found out the backend will reply a message immediately back to the browser when createItem, updateStatus and deleteItem.
+I also found out the backend is able to reply a message immediately back to the browser when createItem, updateStatus and deleteItem.
 
 Then, I discovered the browser will not delete unused connectionId in the DynamoDB. Hence, it will create an internal server error when the connectionId no longer exists.
 
