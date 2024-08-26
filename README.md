@@ -58,12 +58,12 @@ Three useStates are used to save states:
 
 ```
 const [message, setMessage] = useState("");
-  const [dnditems, setDndItems] = useState<Array<Array<dndItemsObject>>>([
-    [],
-    [],
-    [],
-  ]);
-  const [startnget, setStartnget] = useState(false);
+const [dnditems, setDndItems] = useState<Array<Array<dndItemsObject>>>([
+  [],
+  [],
+  [],
+]);
+const [startnget, setStartnget] = useState(false);
 ```
 
 The "Start The Application" button will set startnget state to be true:
@@ -84,15 +84,15 @@ The "Start The Application" button will set startnget state to be true:
 The following useEffect is used to get data when "Start The Application" button is clicked:
 
 ```
-  useEffect(() => {
-    if (startnget) {
-      if (message && JSON.parse(message).response) {
-        const input = separateItems(JSON.parse(message).response.Items);
-        setDndItems(input);
-        setStartnget(false);
-      }
+useEffect(() => {
+  if (startnget) {
+    if (message && JSON.parse(message).response) {
+      const input = separateItems(JSON.parse(message).response.Items);
+      setDndItems(input);
+      setStartnget(false);
     }
-  }, [message, startnget]);
+  }
+}, [message, startnget]);
 ```
 
 ## Prepare To Use Atlassian Drag And Drop Library
@@ -114,7 +114,7 @@ I create "Click & Create" and "Click & Update" buttons to send websocket create 
   className="border border-red-500 ml-4"
 >
   Click & Create
-  </button>
+</button>
 <button
   onClick={() =>
     ws.send(
@@ -129,18 +129,18 @@ I create "Click & Create" and "Click & Update" buttons to send websocket create 
   className="border border-red-500 ml-4"
 >
   Click & Update
-  </button>
+</button>
 ```
 
 And save the fetched data into dnditems state when the buttons are clicked using useEffect.
 
 ```
 useEffect(() => {
-    if (message && JSON.parse(message).Items) {
-      const input = separateItems(JSON.parse(message).Items);
-      setDndItems(input);
-    }
-  }, [message]);
+  if (message && JSON.parse(message).Items) {
+    const input = separateItems(JSON.parse(message).Items);
+    setDndItems(input);
+  }
+}, [message]);
 ```
 
 I create separateItems function to put items in different status into their own categories. The return is an array of array of objects.
@@ -161,7 +161,7 @@ function separateItems(arr: Array<dndItemsObject>) {
       }
     }
     return [arrTodo, arrInprogress, arrDone];
-  }
+}
 ```
 
 I also solve a typescript error 'type is not assignable to type intrinsicattributes' with this guide: [Type X is not assignable to type IntrinsicAttributes](https://www.reddit.com/r/reactjs/comments/oq1rtp/type_authors_author_is_not_assignable_to_type/).
@@ -189,52 +189,52 @@ The test is to create an item in the terminal and observe if the web app will up
 I concern whether the items in a column have the same order as in the other browser window. As a result, I improve the separateItems function:
 
 ```
-  function separateItems(arr: Array<dndItemsObject>) {
-    const arrTodo = [];
-    const arrInprogress = [];
-    const arrDone = [];
+function separateItems(arr: Array<dndItemsObject>) {
+  const arrTodo = [];
+  const arrInprogress = [];
+  const arrDone = [];
 
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].status == "todo") {
-        arrTodo.push(arr[i]);
-      } else if (arr[i].status == "inprogress") {
-        arrInprogress.push(arr[i]);
-      } else if (arr[i].status == "done") {
-        arrDone.push(arr[i]);
-      }
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].status == "todo") {
+      arrTodo.push(arr[i]);
+    } else if (arr[i].status == "inprogress") {
+      arrInprogress.push(arr[i]);
+    } else if (arr[i].status == "done") {
+      arrDone.push(arr[i]);
     }
-
-    // Sort the items alphabetically
-    const sortedArrTodo = arrTodo.sort(function (a, b) {
-      if (a.title < b.title) {
-        return -1;
-      } else if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    });
-
-    const sortedArrInprogress = arrInprogress.sort(function (a, b) {
-      if (a.title < b.title) {
-        return -1;
-      } else if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    });
-
-    const sortedArrDone = arrDone.sort(function (a, b) {
-      if (a.title < b.title) {
-        return -1;
-      } else if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    });
-    // Sorting end
-
-    return [sortedArrTodo, sortedArrInprogress, sortedArrDone];
   }
+
+  // Sort the items alphabetically
+  const sortedArrTodo = arrTodo.sort(function (a, b) {
+    if (a.title < b.title) {
+      return -1;
+    } else if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  });
+
+  const sortedArrInprogress = arrInprogress.sort(function (a, b) {
+    if (a.title < b.title) {
+      return -1;
+    } else if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  });
+
+  const sortedArrDone = arrDone.sort(function (a, b) {
+    if (a.title < b.title) {
+      return -1;
+    } else if (a.title > b.title) {
+      return 1;
+    }
+    return 0;
+  });
+  // Sorting end
+
+  return [sortedArrTodo, sortedArrInprogress, sortedArrDone];
+}
 ```
 
 This sorting method is from the [FreeCodeCamp Guide](https://www.freecodecamp.org/news/how-to-sort-alphabetically-in-javascript/).
@@ -299,39 +299,39 @@ I find out the Sockette will create a lot of connection when running the web app
 ```
 const [ws, setWs] = useState<Sockette>(new Sockette(""));
 ...
-  useEffect(() => {
-    const newWs = new Sockette(
-      "wss://144lhasnn9.execute-api.eu-north-1.amazonaws.com/production/",
-      {
-        timeout: 5e3,
-        maxAttempts: 10,
-        onopen: (e) => {
-          console.log("Connected!", e);
-          setConnectStatus("Connected! Please Click The Button To Start.");
-          setIsConnected(true);
-        },
-        onmessage: (e) => {
-          console.log("Received:", e);
-          if (e.data !== "") {
-            setMessage(e.data);
-          }
-        },
-        onreconnect: (e) => {
-          console.log("Reconnecting...", e);
-          setConnectStatus("Reconnecting...");
-          setIsConnected(false);
-        },
-        onmaximum: (e) => console.log("Stop Attempting!", e),
-        onclose: (e) => {
-          console.log("Closed!", e);
-          setConnectStatus("Closed!");
-          setIsConnected(false);
-        },
-        onerror: (e) => console.log("Error:", e),
-      }
-    );
-    setWs(newWs);
-  }, []);
+useEffect(() => {
+  const newWs = new Sockette(
+    "wss://144lhasnn9.execute-api.eu-north-1.amazonaws.com/production/",
+    {
+      timeout: 5e3,
+      maxAttempts: 10,
+      onopen: (e) => {
+        console.log("Connected!", e);
+        setConnectStatus("Connected! Please Click The Button To Start.");
+        setIsConnected(true);
+      },
+      onmessage: (e) => {
+        console.log("Received:", e);
+        if (e.data !== "") {
+          setMessage(e.data);
+        }
+      },
+      onreconnect: (e) => {
+        console.log("Reconnecting...", e);
+        setConnectStatus("Reconnecting...");
+        setIsConnected(false);
+      },
+      onmaximum: (e) => console.log("Stop Attempting!", e),
+      onclose: (e) => {
+        console.log("Closed!", e);
+        setConnectStatus("Closed!");
+        setIsConnected(false);
+      },
+      onerror: (e) => console.log("Error:", e),
+    }
+  );
+  setWs(newWs);
+}, []);
 ```
 
 The web app will now not creating too many connection with the WebSocket API.
@@ -352,10 +352,10 @@ Refering back to handleOnDragEnd function, I added the line
 
 ```
 if (
-      source.index == destination.index &&
-      source.droppableId == destination.droppableId
+    source.index == destination.index &&
+    source.droppableId == destination.droppableId
     )
-      return;
+    return;
 ```
 
 to stop the function from responding when a user drags and drops an item back to the same position.
