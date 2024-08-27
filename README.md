@@ -32,6 +32,8 @@ Here is my journey to create a React, TypeScript, Tailwind CSS and Vite project 
 
 15. [Algorithm To Update Items On The Client Side](#algorithm-to-update-items-on-the-client-side)
 
+16. [Notice: Tackle with errors](#notice-tackle-with-errors)
+
 ## Initialize React Typescript Tailwind Vite Project
 
 I create and initialize the project by follow this guide: [How to setup React, TypeScript, and Tailwind CSS with Vite in a Project](https://medium.com/@pushpendrapal_/how-to-setup-react-typescript-and-tailwind-css-with-vite-in-a-project-8d9b0b51d1bd).
@@ -440,3 +442,9 @@ const handleOnDragEnd = (result: DropResult) => {
 Here, a combination of map, filter, sort and push method are used to create the algorithm.
 
 This algorithm is inspired from this tutorial: [How to Remove Multiple Objects from Nested Array of Objects in JavaScript](https://www.geeksforgeeks.org/how-to-remove-multiple-objects-from-nested-array-of-objects-in-javascript/).
+
+## Notice: Tackle with errors
+
+When testing and running the frontend, I discovered that sometimes the browser and terminal encounter internal service errors. After testing everything, I found that it is due to undelete connectionId in the usersTable in the DynamoDB. The reason for saving undelete connectionId is that the browser cannot correctly close the websocket.
+
+Deleting the unused connectionId from usersTable will solve the problem.
