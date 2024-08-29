@@ -1,5 +1,7 @@
 # ciptex-task-management-frontend
 
+<img src="./pic/task-management-demo.gif">
+
 Here is my journey to create a React, TypeScript, Tailwind CSS and Vite project with Sockette websocket and Atlassian Drag and Drop Library.
 
 1. [Initialize React Typescript Tailwind Vite Project](#initialize-react-typescript-tailwind-vite-project)
