@@ -1,6 +1,6 @@
 # ciptex-task-management-frontend
 
-This is task management app using WebSocket API with Lambda function and DynamoDB in the backend, and using Sockette websocket and Atlassian Drag and Drop Library in the React frontend.
+This is a task management app using WebSocket API with Lambda function and DynamoDB in the backend, and using Sockette websocket and Atlassian Drag and Drop Library in the React frontend.
 
 The frontend used React and TypeScript. Realtime updates are implemented with Sockette websocket. Atlassian Drag and Drop Library is used for task management. It allows users to add new tasks and update task statuses.
 
